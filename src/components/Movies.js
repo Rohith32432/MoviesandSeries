@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Model from './model';
 
 function Movies({ data }) {
     const [movies, setMovies] = useState([]);
@@ -24,16 +25,22 @@ function Movies({ data }) {
         }
         fetchData();
     }, []);
-
+    const [show, setShow] = useState(false);
+    const[modeldata,setmodeldata]=useState({})
+    const handlemodel=(id)=>{
+        setShow(true)
+        setmodeldata(movies[id])
+    }
     return (
         <>
+            <Model show={show } setShow={setShow} data={modeldata}/>
             <h1>Movies List</h1>
             <div className="d-flex m-2" style={{ overflowX: 'scroll' }}>
                 {movies &&
                     movies.map((movie, i) => (
-                        <div key={i} className="component mx-2" onMouseOver={() => handleHover(i)}>
-                            {movie.backdrop_path && <img src={`https://image.tmdb.org/t/p/w400/${movie.backdrop_path}`} alt={movie.original_title} />}
-                            <h3>{movie.original_title}</h3>
+                        <div key={i} className="component mx-2" onMouseOver={() => handleHover(i)} onClick={()=>handlemodel(i)}>
+                            {movie.backdrop_path && <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.original_title} />}
+                            <h4>{movie.original_title}</h4>
                         </div>
                     ))}
             </div>
