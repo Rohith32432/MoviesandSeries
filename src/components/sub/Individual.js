@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Image, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import Search from './search';
 
 function Individual() {
   const { id } = useParams();
   const [poster, setPoster] = useState(null); 
   const [cast, setCast] = useState([]); 
-
+  const [celbname,setcelbsname]=useState('')
+  const [show, setShow] = useState(false);
   async function getcelebs(id) {
     const data = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&api_key=${process.env.REACT_APP_APIKEY}`);
     const res = await data.json();
@@ -94,7 +96,12 @@ function Individual() {
     fetchData();
     getcelebs(id);
   }, [id]);
-
+  console.log(poster);
+const handlecast=(e)=>{
+  console.log(e);
+  setShow(true)
+  setcelbsname(e.name)
+}
   return (
     <div>
       {poster ? ( 
@@ -104,13 +111,13 @@ function Individual() {
           <h3>{poster.release_date}</h3>
           <h3>{poster.vote_average}</h3>
         
-          <img src={`https://image.tmdb.org/t/p/w500/${ poster.images.logos[0].file_path}`}  alt="" />
+          <img src={poster.images.logos[0]?`https://image.tmdb.org/t/p/w500/${ poster.images.logos[0].file_path}`:"" }  alt="" />
 
-          <a href={`https://www.youtube.com/watch?v=${poster.videos.key}`} target='_blank'><Button>click</Button></a>
+          <a href={poster.videos ?`https://www.youtube.com/watch?v=${poster.videos.key}`:"#"} target='_blank'><Button>click</Button></a>
         
           <div className='d-flex flex-wrap gap-3' >
         {cast.map((e,i)=>(
-          <div key={i}>
+          <div key={i} onClick={()=>{handlecast(e)}}>
 
             <Image src={e.profile_path?`https://image.tmdb.org/t/p/w400/${e.profile_path}`:"https://wordsinspiration.com/wp-content/uploads/2022/04/kakashi-feeling-embarassed-kakashi-hatake-quote.jpg"} height={120} width={120} style={{ objectFit: 'cover' }}  />,
             <li>{e.name}</li>
@@ -124,6 +131,7 @@ function Individual() {
       ) : (
         <Spinner animation="border" />
       )}
+       <Search show={show} setShow={setShow}  name={celbname} />
     </div>
   );
 }

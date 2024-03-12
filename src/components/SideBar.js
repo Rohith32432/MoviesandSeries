@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,7 +7,10 @@ import { FaHome } from "react-icons/fa";
 import { MdMovie } from "react-icons/md";
 import { RiMovie2Fill } from "react-icons/ri";
 import { Link } from 'react-router-dom';
+import { IoSearch } from "react-icons/io5";
+import Search from './sub/search';
 function Sidebar() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <Navbar expand="lg" className="bg-dark navbar-dark" style={{ height: '100vh', width: 'max-content' }}>
@@ -16,10 +19,12 @@ function Sidebar() {
           <Nav className="flex-column my-5">
             <Link to="/home " className='nav-link m-2'><FaHome size={35} /></Link>
             <Link to="/series" className=' nav-link m-2'><MdMovie size={35}/></Link>
+            <div className='nav-link m-2' onClick={()=>{setShow(true)}}><IoSearch size={35}/></div>
           </Nav>
 
         </Container>
       </Navbar>
+      <Search show={show} setShow={setShow} name={null} />
     </>
   );
 }
