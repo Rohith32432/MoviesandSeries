@@ -23,14 +23,14 @@ function Slider() {
             <AutoplaySlider
                 bullets={false}
                 mobileTouch={true}
-                style={{ height: '100vh' }}
+                style={{ height: '40vh' }}
                 play={true}
                
                 cancelOnInteraction={false} // should stop playing on user interaction
                 interval={3000}
             >
                 {upcoming.map((e, i) => (
-                    <div key={i} data-src={`https://image.tmdb.org/t/p/w500/${e.backdrop_path}`} style={{ display: 'block' }}>
+                    <div key={i} data-src={`https://image.tmdb.org/t/p/w1280/${e.backdrop_path}`} style={{ display: 'block' }}>
                         <div style={{
                             position: 'absolute',
                             display: 'flex'

@@ -102,12 +102,37 @@ function Individual() {
     getcelebs(id);
     
   }, [id]);
-  //console.log(poster);
+ 
 const handlecast=(e)=>{
-  //console.log(e);
+  
   setShow(true)
   setcelbsname(e.name)
 }
+const [arr, setarr] = useState([]);
+
+
+useEffect(() => {
+    const storedWatchlist = localStorage.getItem('watchlist');
+    if (storedWatchlist) {
+        setarr(JSON.parse(storedWatchlist));
+    }
+}, []);
+
+function addwatchlist() {
+  setwatchlist([...watchlist,poster])
+    setarr(prevArr => {
+        if (prevArr.includes(poster.id)) {
+            return prevArr;
+        } else {
+            const updatedArr = [...prevArr, poster.id];
+            localStorage.setItem('watchlist', JSON.stringify(updatedArr));
+            return updatedArr;
+        }
+    });
+}
+
+
+
   return (
     <div>
       {poster ? ( 
@@ -117,7 +142,7 @@ const handlecast=(e)=>{
           <h3>{poster.release_date}</h3>
           <h3>{poster.vote_average}</h3>
         
-        <Button variant='danger'onClick={()=>{setwatchlist([...watchlist,poster])}} >add to wachlist</Button>
+        <Button variant='danger'onClick={addwatchlist} >add to wachlist</Button>
           <img src={poster.images.logos[0]?`https://image.tmdb.org/t/p/w500/${ poster.images.logos[0].file_path}`:"" }  alt="" />
 
           <a href={poster.videos ?`https://www.youtube.com/watch?v=${poster.videos.key}`:"#"} target='_blank'><Button>click</Button></a>

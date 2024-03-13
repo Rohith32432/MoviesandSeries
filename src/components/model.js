@@ -24,16 +24,16 @@ function Model({ show, setShow, data }) {
         ).slice(0, 2);
 
         const totalEntries = [...remainingEntries, ...top3Entries];
-
         setcast(totalEntries)
     }
     async function getcelebs(id) {
+        if ( show)
+        {
         const data = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&api_key=${process.env.REACT_APP_APIKEY}`)
         const res = await data.json()
-
-        if (res && show)
+        if(res)
             topcrew(res.cast)
-
+        }
 
 
     }
@@ -46,7 +46,7 @@ function Model({ show, setShow, data }) {
             <Modal.Body >
                 <Container className='d-flex align-items-center overflow-hidden my-1'>
                     <div className="d-flex flex-column gap-2">
-                        <img src={`https://image.tmdb.org/t/p/w300/${data.poster_path}`} alt="" />
+                        <img src={data.poster_path && `https://image.tmdb.org/t/p/w300/${data.poster_path}`} alt="" />
                         <Link to={`/watch/${data.id}`}>
                             <Button variant='danger' className='w-100'> Watch
                             </Button>
