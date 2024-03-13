@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Image, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Search from './search';
+import { UserGlobal } from '../../context/UserContext';
 
 function Individual() {
   const { id } = useParams();
@@ -9,6 +10,8 @@ function Individual() {
   const [cast, setCast] = useState([]); 
   const [celbname,setcelbsname]=useState('')
   const [show, setShow] = useState(false);
+  const {watchlist,setwatchlist}=UserGlobal()
+
   async function getcelebs(id) {
     const data = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&api_key=${process.env.REACT_APP_APIKEY}`);
     const res = await data.json();
@@ -25,6 +28,7 @@ function Individual() {
     setCast(combinedCast);
   }
   
+
 
   function filterAndSortCrew(res) {
     const x = res.crew.filter((e) => {
@@ -78,6 +82,7 @@ function Individual() {
     return filteredAndSorted;
   }
 
+
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_APIKEY}&append_to_response=images,videos`);
@@ -95,10 +100,11 @@ function Individual() {
 
     fetchData();
     getcelebs(id);
+    
   }, [id]);
-  console.log(poster);
+  //console.log(poster);
 const handlecast=(e)=>{
-  console.log(e);
+  //console.log(e);
   setShow(true)
   setcelbsname(e.name)
 }
@@ -111,10 +117,12 @@ const handlecast=(e)=>{
           <h3>{poster.release_date}</h3>
           <h3>{poster.vote_average}</h3>
         
+        <Button variant='danger'onClick={()=>{setwatchlist([...watchlist,poster])}} >add to wachlist</Button>
           <img src={poster.images.logos[0]?`https://image.tmdb.org/t/p/w500/${ poster.images.logos[0].file_path}`:"" }  alt="" />
 
           <a href={poster.videos ?`https://www.youtube.com/watch?v=${poster.videos.key}`:"#"} target='_blank'><Button>click</Button></a>
-        
+
+
           <div className='d-flex flex-wrap gap-3' >
         {cast.map((e,i)=>(
           <div key={i} onClick={()=>{handlecast(e)}}>
