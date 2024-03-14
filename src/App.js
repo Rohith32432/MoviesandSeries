@@ -7,6 +7,7 @@ import Individual from './components/sub/Individual';
 import UserContext from './context/UserContext';
 import Watchlist from './components/sub/watchlist';
 import Sidebar from './components/SideBar';
+import SeriesInd from './components/sub/SeriesInd';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Route path='/' element={<Home/>} />
       <Route path='/series' element={<Series/>} />
       <Route path='/watch/:id' element={<Individual/>}/>
+      <Route path='/tv/:id' element={<SeriesInd/>}/>
       <Route path='/watchlist' element={<Watchlist/>}/>
      </Routes>
       </UserContext>

@@ -36,7 +36,7 @@ function SeriesList({ data }) {
     }
     return (
         <>
-            <Model show={show} setShow={setShow} data={modeldata} />
+            <Model show={show} setShow={setShow} name={'series'} data={modeldata} />
             <h1>SeriesList List</h1>
             <div className="d-flex m-2 " style={{ flexWrap: 'wrap'}}>
                 {SeriesList &&

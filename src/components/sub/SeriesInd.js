@@ -16,7 +16,7 @@ function Individual() {
   const { watchlist, setwatchlist } = UserGlobal()
 
   async function getcelebs(id) {
-    const data = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&api_key=${process.env.REACT_APP_APIKEY}`);
+    const data = await fetch(`https://api.themoviedb.org/3/tv/${id}/credits?language=en-US&api_key=${process.env.REACT_APP_APIKEY}`);
     const res = await data.json();
     const firstTenCast = res.cast.slice(0, 10);
     const crew = filterAndSortCrew(res);
@@ -89,7 +89,7 @@ function Individual() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_APIKEY}&append_to_response=images,videos`);
+      const response = await fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_APIKEY}&append_to_response=images,videos`);
       const result = await response.json();
       setPoster(result);
       if (result.videos && result.videos.results) {
@@ -157,8 +157,8 @@ function Individual() {
               <div className="details d-flex flex-column align-items-start p-5 w-50  gap-1" >
                 {
                   poster.images.logos[0] ?
-                    <img src={`https://image.tmdb.org/t/p/w500/${poster.images.logos[0].file_path}`} style={{ marginBottom: 50}} alt="" /> :
-                    <h1>{poster.title}</h1>
+                    <img src={`https://image.tmdb.org/t/p/w500/${poster.images.logos[0].file_path}`} style={{ marginBottom: 50 }} alt="" /> :
+                    <h1>{poster.name}</h1>
                 }
                 <p style={{ textAlign: 'start' }}>{poster.overview}</p>
                 <h3 >Rating : {poster.vote_average}/10</h3>
@@ -173,7 +173,7 @@ function Individual() {
 
               </div>
 
-              <img src={`https://image.tmdb.org/t/p/w500/${poster.poster_path}`} style={{ borderRadius: 10,boxShadow:'0px 0px 8px #272a2e'}}  height={650} alt="" />
+              <img src={`https://image.tmdb.org/t/p/w500/${poster.poster_path}`} height={650} alt="" />
 
 
             </div>

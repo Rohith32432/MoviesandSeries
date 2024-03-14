@@ -17,7 +17,7 @@ function Sidebar() {
       <Navbar expand="lg" className="bg-dark navbar-dark" style={{ height: '100vh', width: 'max-content',position:'fixed',zIndex:99 }}>
         <Container className='h-100 d-flex flex-column justify-content-start align-items-center'>
       
-           <Navbar.Brand href="#home" className='m-3'  > <a href="/"  className='nav-link '><RiMovie2Fill  size={50}/></a></Navbar.Brand>
+           <Navbar.Brand href="/" className='m-3'  > <RiMovie2Fill  size={50}/></Navbar.Brand>
          
           <Nav className="flex-column my-5">
             <Link to="/ " className='nav-link m-2'><FaHome size={35} /></Link>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Container, Modal, Button, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-function Model({ show, setShow, data }) {
+function Model({ show, setShow, data ,name}) {
     const handleClose = () => setShow(false);
 
     const [cast, setcast] = useState([])
@@ -36,9 +36,24 @@ function Model({ show, setShow, data }) {
         }
 
 
+
+    }
+
+    async function getSeriescelebs(id) {
+        if ( show)
+        {
+        const data = await fetch(`https://api.themoviedb.org/3/tv/${id}/credits?language=en-US&api_key=${process.env.REACT_APP_APIKEY}`)
+        const res = await data.json()
+        if(res)
+            topcrew(res.cast)
+        }
+
+
+
     }
     useEffect(() => {
-        getcelebs(data.id)
+    name=='series'? getSeriescelebs(data.id)
+        :getcelebs(data.id)
     }, [data])
 
     return (
@@ -47,7 +62,7 @@ function Model({ show, setShow, data }) {
                 <Container className='d-flex align-items-center overflow-hidden my-1'>
                     <div className="d-flex flex-column gap-2">
                         <img src={data.poster_path && `https://image.tmdb.org/t/p/w300/${data.poster_path}`} alt="" />
-                        <Link to={`/watch/${data.id}`}>
+                        <Link to={name!=='series'?`/watch/${data.id}`:`/tv/${data.id}`}>
                             <Button variant='danger' className='w-100'> Watch
                             </Button>
                         </Link>

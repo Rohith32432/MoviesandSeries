@@ -24,7 +24,8 @@ function Movies({ data }) {
             }
         }
         fetchData();
-    }, [count]);
+    }, [count]); 
+  
     const [show, setShow] = useState(false);
     const [modeldata, setmodeldata] = useState({})
     const handlemodel = (id) => {
