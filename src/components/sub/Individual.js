@@ -173,7 +173,7 @@ function Individual() {
 
               </div>
 
-              <img src={`https://image.tmdb.org/t/p/w500/${poster.poster_path}`} style={{ borderRadius: 10,boxShadow:'0px 0px 8px #272a2e'}}  height={650} alt="" />
+              <img src={`https://image.tmdb.org/t/p/w500/${poster.poster_path}`}   style={{ borderRadius: 10}}  height={650} alt="" />
 
 
             </div>
