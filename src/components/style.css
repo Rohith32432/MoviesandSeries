@@ -1,0 +1,23 @@
+#sidebar{
+   height: 100vh;
+   position: fixed;
+   z-index:999 ;
+   bottom: 0;
+}
+#res-movies{
+  width: 93%;
+}
+@media (max-width: 990px) { 
+    #sidebar {
+      width: 100vw;
+      height: max-content ;
+    }
+
+    #res-movies{
+      width: 100%;
+    }
+    #container{
+      flex-direction: row !important;
+    }
+  }
+  

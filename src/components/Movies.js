@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Model from './model';
 import Pagination from 'react-bootstrap/Pagination';
+import { MdMovieCreation } from "react-icons/md";
+import { Spinner } from 'react-bootstrap';
 function Movies({ data }) {
     const [movies, setMovies] = useState([]);
     const [count, setcount] = useState(1)
-    function handleHover(id) {
-        if (movies[id]) {
-            data(movies[id]);
-        }
-    }
-
     useEffect(() => {
         async function fetchData() {
             try {
@@ -24,8 +20,8 @@ function Movies({ data }) {
             }
         }
         fetchData();
-    }, [count]); 
-  
+    }, [count]);
+
     const [show, setShow] = useState(false);
     const [modeldata, setmodeldata] = useState({})
     const handlemodel = (id) => {
@@ -35,32 +31,39 @@ function Movies({ data }) {
     return (
         <>
             <Model show={show} setShow={setShow} data={modeldata} />
-            <h1>Movies List</h1>
-            <div className="d-flex m-2 " style={{ flexWrap: 'wrap'}}>
-                {movies &&
+
+            <div className="d-flex flex-column flex-lg-row align-items-center justify-content-between m-2 mx-5">
+
+            <h1>Movies List  <MdMovieCreation  style={{marginBottom:4}}/></h1>
+            <div >
+
+            <Pagination className='m-0 ' >
+                <Pagination.First  linkClassName='bg-dark text-white' onClick={() => { setcount(1) }} />
+                <Pagination.Prev  linkClassName='bg-dark text-white' onClick={() => { setcount( 1) }} />
+                {
+                    Array(5).fill().map((e, i) => (
+                        <Pagination.Item linkClassName='bg-dark text-white' onClick={() => { setcount(i + 1) }} key={i}  >{i + 1}</Pagination.Item>
+                    ))
+                }
+                <Pagination.Ellipsis linkClassName='bg-dark text-white' />
+                <Pagination.Next linkClassName='bg-dark text-white ' onClick={() => { setcount(count + 1) }} />
+                <Pagination.Last linkClassName='bg-dark text-white' onClick={()=>{setcount(10)}} />
+            </Pagination>
+            </div>
+
+            </div>
+            <div className="d-flex m-2 justify-content-center " style={{ flexWrap: 'wrap' }}>
+                {movies ?
                     movies.map((movie, i) => (
-                        <div key={i} className="component m-2" onMouseOver={() => handleHover(i)} onClick={() => handlemodel(i)}>
+                        <div key={i} className="component m-2" onClick={() => handlemodel(i)}>
                             {movie.backdrop_path && <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.original_title} height={300} />}
                             {/* <h4>{movie.original_title}</h4> */}
                         </div>
-                    ))}
+                    )):
+                    <Spinner/>}
             </div>
 
-            <Pagination className='pagination-dark'>
-                <Pagination.First onClick={() => { setcount(1) }} />
-                <Pagination.Prev onClick={() => { setcount(count - 1) }} />
-                {
-                    Array(5).fill().map((e, i) => (
-                        <Pagination.Item onClick={() => { setcount(i + 1) }} key={i}  >{i + 1}</Pagination.Item>
-                    ))
-                }
-
-                <Pagination.Ellipsis />
-
-
-                <Pagination.Next onClick={() => { setcount(count + 1) }} />
-                <Pagination.Last />
-            </Pagination>
+           
         </>
     );
 }

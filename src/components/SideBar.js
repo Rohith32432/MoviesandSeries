@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
+import './style.css'
 import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaHome } from "react-icons/fa";
@@ -14,12 +15,12 @@ function Sidebar() {
   const [show, setShow] = useState(false);
   return (
     <>
-      <Navbar expand="lg" className="bg-dark navbar-dark" style={{ height: '100vh', width: 'max-content',position:'fixed',zIndex:99 }}>
-        <Container className='h-100 d-flex flex-column justify-content-start align-items-center'>
+      <Navbar expand="lg" className="bg-dark navbar-dark " id='sidebar' >
+        <Container className='h-100 d-flex flex-lg-column flex-sm-row  justify-content-lg-start justify-content-sm-center align-items-center' >
       
-           <Navbar.Brand href="/" className='m-3'  > <RiMovie2Fill  size={50}/></Navbar.Brand>
+           <Navbar.Brand href="/" className='m-lg-3 m-sm-0 d-sm-none d-lg-block'  > <RiMovie2Fill  size={50}/></Navbar.Brand>
          
-          <Nav className="flex-column my-5">
+          <Nav className="flex-lg-column flex-sm-row  flex-xs-row my-lg-5 m-sm-0 gap-sm-4 gap-lg-0 " id='container'>
             <Link to="/ " className='nav-link m-2'><FaHome size={35} /></Link>
             <Link to="/series" className=' nav-link m-2'><MdMovie size={35}/></Link>
             <div className='nav-link m-2' onClick={()=>{setShow(true)}}><IoSearch size={35}/></div>

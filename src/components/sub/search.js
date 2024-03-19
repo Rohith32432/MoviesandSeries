@@ -47,13 +47,12 @@ function Search({ show, setShow, name }) {
                 <Offcanvas.Body>
                     {name == null ?
                         <>
-                            <Form.Control
+                    
+                            
+                            <Form.Control  
                                 className='bg-dark text-light'
-                                placeholder="Search Movies"
-                                aria-label="Search Movies"
-                                aria-describedby="basic-addon1"
-                                autoFocus={true}
                                 onChange={(e) => { searchMovies(e) }}
+                               autoFocus={true}
                             />
                             <div className="d-flex flex-wrap p-2 my-2">
                                 {movies.map((movie, index) => (

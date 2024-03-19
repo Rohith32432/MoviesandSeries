@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
-import Slider from './components/slider';
+import './App.css'
 import Home from './components/Home';
 import Series from './components/Series';
 import Individual from './components/sub/Individual';
@@ -23,6 +22,7 @@ function App() {
       <Route path='/watchlist' element={<Watchlist/>}/>
      </Routes>
       </UserContext>
+      
 
     </div>
   );

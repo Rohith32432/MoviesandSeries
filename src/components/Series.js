@@ -7,7 +7,7 @@ function Home() {
   
   return (
     <div className="d-flex overflow-hidden justify-content-end"  >
-      <div className="d-flex flex-column " style={{width:'93%'}}>
+      <div className="d-flex flex-column " id='res-movies'>
 
       <div className=' my-2 position-relative w-100' style={{ height:350, overflow: "hidden" ,backgroundImage:`url(https://image.tmdb.org/t/p/w1280/${details.backdrop_path})`,backgroundRepeat:'no-repeat',backgroundSize:'cover'}}>
           <div className='position-absolute top-0 '>

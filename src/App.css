@@ -3,6 +3,14 @@
   background-color:#282a2f;
   color: white;
 }
+::-webkit-scrollbar{
+  background-color: #282a2f;
+  width: 10px;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #747474c0;
+  border-radius: 10px;
+}
 
 .App-logo {
   height: 40vmin;
