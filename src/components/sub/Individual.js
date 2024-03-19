@@ -152,12 +152,13 @@ function Individual() {
       {poster ? (
         <div className='d-flex  justify-content-end w-100' >
           <div className="top position-relative " style={{ width: '90%' }} >
-            <div className="hero-section d-flex justify-content-around m-5 align-items-center">
+            <div className="hero-section d-flex  flex-lg-row flex-sm-column justify-content-lg-around justify-content-sm-center m-5 align-items-lg-center">
 
-              <div className="details d-flex flex-column align-items-start p-5 w-50  gap-1" >
+             <div className="details d-flex flex-column align-items-start p-5 w-50  gap-1">
+
                 {
                   poster.images.logos[0] ?
-                    <img src={`https://image.tmdb.org/t/p/w500/${poster.images.logos[0].file_path}`} style={{ marginBottom: 50}} alt="" /> :
+                    <img src={`https://image.tmdb.org/t/p/w500/${poster.images.logos[0].file_path}`}  style={{ marginBottom: 50}} alt="" /> :
                     <h1>{poster.title}</h1>
                 }
                 <p style={{ textAlign: 'start' }}>{poster.overview}</p>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Model from './model';
 import Pagination from 'react-bootstrap/Pagination';
 import { MdMovieCreation } from "react-icons/md";
-import { Spinner } from 'react-bootstrap';
+import { OverlayTrigger, Spinner, Tooltip } from 'react-bootstrap';
 function Movies({ data }) {
     const [movies, setMovies] = useState([]);
     const [count, setcount] = useState(1)
@@ -27,6 +27,13 @@ function Movies({ data }) {
     const handlemodel = (id) => {
         setShow(true)
         setmodeldata(movies[id])
+    }
+    const tooltip =(name)=>{
+        return (
+            <Tooltip id="button-tooltip "  >
+      <div className='p-1'>{name}</div>
+    </Tooltip>
+        )
     }
     return (
         <>
@@ -55,9 +62,11 @@ function Movies({ data }) {
             <div className="d-flex m-2 justify-content-center " style={{ flexWrap: 'wrap' }}>
                 {movies ?
                     movies.map((movie, i) => (
-                        <div key={i} className="component m-2" onClick={() => handlemodel(i)}>
+                        <div key={i} className=" m-2" id='cardx' onClick={() => handlemodel(i)}>
+                            <OverlayTrigger placement="bottom" overlay={tooltip(movie.title)}>
                             {movie.backdrop_path && <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.original_title} height={300} />}
                             {/* <h4>{movie.original_title}</h4> */}
+                            </OverlayTrigger>
                         </div>
                     )):
                     <Spinner/>}

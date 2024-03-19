@@ -59,7 +59,7 @@ function Model({ show, setShow, data ,name}) {
     return (
         <Modal show={show} onHide={handleClose} size='lg' aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Body >
-                <Container className='d-flex align-items-center overflow-hidden my-1'>
+                <Container className='d-flex flex-sm-column flex-lg-row align-items-center overflow-hidden my-1'>
                     <div className="d-flex flex-column gap-2">
                         <img src={data.poster_path && `https://image.tmdb.org/t/p/w300/${data.poster_path}`} alt="" />
                         <Link to={name!=='series'?`/watch/${data.id}`:`/tv/${data.id}`}>
@@ -67,14 +67,15 @@ function Model({ show, setShow, data ,name}) {
                             </Button>
                         </Link>
                     </div>
-                    <div className="m-2 text-left " >
-                        <h1>{data.title}</h1>
-                        <div className='d-flex flex-roe gap-3 my-2'>
+                    <div className="m-2 text-lg-left  " >
+                        <h1>{ name==null ?
+                        data.title:data.name}</h1>
+                        <div className='d-flex flex-sm-column flex-lg-row gap-3 my-2'>
                             <h4>{data.release_date}</h4>
                             <h4>{data.vote_average}</h4>
                         </div>
-                        <p>{data.overview}</p>
-                        <div className="d-flex flex-wrap gap-2 " >
+                        <p className='d-sm-none d-lg-block'>{data.overview}</p>
+                        <div className="d-flex flex-wrap gap-2 d-sm-none d-lg-flex" >
 
                             {
                                 cast.map((celb, i) => (
