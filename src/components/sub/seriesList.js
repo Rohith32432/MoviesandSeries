@@ -60,7 +60,7 @@ function SeriesList({ data }) {
             <div className="d-flex m-2 justify-content-center " style={{ flexWrap: 'wrap' }}>
                 {SeriesList &&
                     SeriesList.map((movie, i) => (
-                        <div key={i} className="component m-2" onMouseOver={() => handleHover(i)} onClick={() => handlemodel(i)}>
+                        <div key={i} className="component m-2" id='cardx' onMouseOver={() => handleHover(i)} onClick={() => handlemodel(i)}>
                             {movie.backdrop_path && <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.original_title} height={300} />}
                             {/* <h4>{movie.original_title}</h4> */}
                         </div>

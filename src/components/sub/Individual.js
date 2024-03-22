@@ -165,7 +165,7 @@ function Individual() {
                 <h3 >Rating : {poster.vote_average}/10</h3>
                 <h5>Relase Date : {poster.release_date}</h5>
                 <div className='d-flex w-100 gap-5 my-3'>
-                  <a href={poster.videos ? `https://www.youtube.com/watch?v=${poster.videos.key}` : "#"} target='_blank' className='flex-grow-1'>
+                  <a href={poster.videos ? `https://www.youtube.com/watch?v=${poster.videos.key}` : "#"}  className='flex-grow-1'>
                     <Button variant='danger' className='w-100 p-2'>Watch Trailer</Button>
                   </a>
                   <Button variant='danger' onClick={addwatchlist} style={{ width: 'auto' }}>Add to Watchlist</Button> 
@@ -181,7 +181,7 @@ function Individual() {
 
             <div className='d-flex flex-wrap gap-2' >
               {cast.map((e, i) => (
-                <div style={{width:150}} key={i} onClick={() => { handlecast(e) }}>
+                <div style={{width:150,cursor:'pointer'}} key={i} onClick={() => { handlecast(e) }}>
 
                   <Image src={e.profile_path ? `https://image.tmdb.org/t/p/w400/${e.profile_path}` : "../default.png"} height={120} width={120} style={{ borderRadius:10, objectFit: 'cover' }} />
                   <li>{e.name}</li>

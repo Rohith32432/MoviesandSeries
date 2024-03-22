@@ -44,7 +44,7 @@ function Watchlist() {
             <div className="watchlist d-flex gap-2 flex-wrap " style={{ width: '80%' }}>
                
                 {
-                    movies.length==0?
+                    movies.length===0?
                     <h1>NOTHING THERE</h1>
                     :
                 movies.map((movie, i) => (

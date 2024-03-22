@@ -64,18 +64,26 @@ function Search({ show, setShow, name }) {
                                 ))}
                             </div>
                         </> :
-                        <>
-                            {celebs.name &&
-                                <div>
-                                    <h3>{celebs.name}</h3>
-                                    <img src={`https://image.tmdb.org/t/p/w500/${celebs.profile_path}`} height={210} alt="" />
-                                    {celebs.known_for.map((movie, subIndex) => (
-                                        <h5 key={subIndex}>{movie.title}</h5>
-                                    ))}
-                                </div>
-                            }
-                            {celebs.name === undefined && <p>No celebrities found.</p>}
-                        </>
+                      <>
+                      {celebs.name && (
+                          <div className="col align-items-start">
+                              <div className="col">
+                                  <h3>{celebs.name}</h3>
+                                  <img src={`https://image.tmdb.org/t/p/w500/${celebs.profile_path}`} className="img-fluid img-thumbnail" alt={celebs.name} style={{ maxWidth: '200px' }} />
+                              </div>
+                              <div className="col my-3">
+                                  <h5>Known For:</h5>
+                                  <ul className="list-unstyled">
+                                      {celebs.known_for.map((movie, subIndex) => (
+                                          <li key={subIndex}>{movie.title}</li>
+                                      ))}
+                                  </ul>
+                              </div>
+                          </div>
+                      )}
+                      {celebs.name === undefined && <p>No celebrities found.</p>}
+                  </>
+                  
                     }
                 </Offcanvas.Body>
             </Offcanvas>

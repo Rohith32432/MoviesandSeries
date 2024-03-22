@@ -60,17 +60,25 @@ function Movies({ data }) {
 
             </div>
             <div className="d-flex m-2 justify-content-center " style={{ flexWrap: 'wrap' }}>
-                {movies ?
-                    movies.map((movie, i) => (
-                        <div key={i} className=" m-2" id='cardx' onClick={() => handlemodel(i)}>
-                            <OverlayTrigger placement="bottom" overlay={tooltip(movie.title)}>
-                            {movie.backdrop_path && <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.original_title} height={300} />}
-                            {/* <h4>{movie.original_title}</h4> */}
-                            </OverlayTrigger>
-                        </div>
-                    )):
-                    <Spinner/>}
-            </div>
+            {movies ?
+    movies.map((movie, i) => (
+        <div key={i} className=" m-2" id='cardx' onClick={() => handlemodel(i)}>
+            {console.log(movie)}o
+            {movie.backdrop_path ? (
+                <OverlayTrigger placement="bottom" overlay={tooltip(movie.title) }>
+                    {movie.backdrop_path && <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.original_title} height={300} />}
+                </OverlayTrigger>
+            ) : (
+                movie.backdrop_path && <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.original_title} height={300} />
+            )}
+        </div>
+    ))
+    :
+    <Spinner/>
+}
+
+</div>
+
 
            
         </>

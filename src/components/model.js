@@ -70,7 +70,7 @@ function Model({ show, setShow, data ,name}) {
                     <div className="m-2 text-lg-left  " >
                         <h1>{ name==null ?
                         data.title:data.name}</h1>
-                        <div className='d-flex flex-sm-column flex-lg-row gap-3 my-2'>
+                        <div className='d-lg-flex d-sm-none  flex-lg-row gap-3 my-2'>
                             <h4>{data.release_date}</h4>
                             <h4>{data.vote_average}</h4>
                         </div>
