@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-
-import Movies from './Movies';
 import SeriesList from './sub/seriesList';
 function Home() {
     const [details,setdetails]=useState({})

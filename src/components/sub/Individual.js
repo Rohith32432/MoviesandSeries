@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ButtonGroup, Image, Spinner } from 'react-bootstrap';
+import { Button, Image, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Search from './search';
 import { UserGlobal } from '../../context/UserContext';
@@ -120,7 +120,7 @@ function Individual() {
     if (storedWatchlist) {
       setarr(JSON.parse(storedWatchlist));
     }
-  }, []);
+  }, [ ]);
 
   function addwatchlist() {
     setwatchlist([...watchlist, poster])

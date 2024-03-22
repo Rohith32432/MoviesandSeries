@@ -52,7 +52,7 @@ function Model({ show, setShow, data ,name}) {
 
     }
     useEffect(() => {
-    name=='series'? getSeriescelebs(data.id)
+    name==='series'? getSeriescelebs(data.id)
         :getcelebs(data.id)
     }, [data])
 

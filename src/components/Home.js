@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import Sidebar from './SideBar';
 import Movies from './Movies';
 import Slider from './slider';
 import './style.css'
 
 function Home() {
-    const [details,setdetails]=useState({})
   
   return (
     <div className="d-flex overflow-hidden justify-content-end"  >
       <div className="d-flex flex-column " id='res-movies' >
 
         <Slider/>
-        <Movies data={setdetails} />
+        <Movies data={''} />
 
       </div>
     </div>
