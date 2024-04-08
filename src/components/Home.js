@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Movies from './Movies';
 import Slider from './slider';
 import './style.css'

@@ -3,7 +3,6 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import './style.css'
 import Navbar from 'react-bootstrap/Navbar';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaHome } from "react-icons/fa";
 import { MdMovie } from "react-icons/md";
 import { RiMovie2Fill } from "react-icons/ri";
