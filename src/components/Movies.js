@@ -3,7 +3,7 @@ import Model from './model';
 import Pagination from 'react-bootstrap/Pagination';
 import { MdMovieCreation } from "react-icons/md";
 import { OverlayTrigger, Spinner, Tooltip } from 'react-bootstrap';
-function Movies({ data }) {
+function Movies() {
     const [movies, setMovies] = useState([]);
     const [count, setcount] = useState(1)
     useEffect(() => {
@@ -12,9 +12,7 @@ function Movies({ data }) {
                 const response = await fetch(`https://api.themoviedb.org/3/discover/movie?page=${count}&sort_by=popularity.desc&api_key=${process.env.REACT_APP_APIKEY}`);
                 const result = await response.json();
                 setMovies(result.results);
-                if (result.results.length > 0) {
-                    data(result.results[0]);
-                }
+              
             } catch (error) {
                 console.error('Error fetching movies:', error);
             }
@@ -63,7 +61,6 @@ function Movies({ data }) {
             {movies ?
     movies.map((movie, i) => (
         <div key={i} className=" m-2" id='cardx' onClick={() => handlemodel(i)}>
-            {console.log(movie)}o
             {movie.backdrop_path ? (
                 <OverlayTrigger placement="bottom" overlay={tooltip(movie.title) }>
                     {movie.backdrop_path && <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.original_title} height={300} />}

@@ -16,21 +16,20 @@ function App() {
   return (
     <div className="App">
       <Sidebar/>
-      <Routes>
-        <Route element={<Login/>} path='/login'></Route>
-        <Route element={<Register/>} path='/reg'></Route>
-      </Routes>
 
-
-      {/* <UserContext>
+      <UserContext>
      <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/series' element={<Series/>} />
       <Route path='/watch/:id' element={<Individual/>}/>
       <Route path='/tv/:id' element={<SeriesInd/>}/>
       <Route path='/watchlist' element={<Watchlist/>}/>
+        <Route element={<Login/>} path='/login'></Route>
+        <Route element={<Register/>} path='/reg'></Route>
+      
      </Routes>
-      </UserContext> */}
+      
+      </UserContext>
       
 
     </div>

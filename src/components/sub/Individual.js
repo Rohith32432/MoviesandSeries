@@ -5,6 +5,7 @@ import Search from './search';
 import { UserGlobal } from '../../context/UserContext';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 
 function Individual() {
@@ -88,7 +89,15 @@ function Individual() {
 
 
   useEffect(() => {
+    
+    async function validate(){
+      // const {data} = await axios.get('http://localhost:2114/api/viewusers')
+      // if(data=='invalid') return false
+      // else return true
+      return true
+    }
     async function fetchData() {
+      if(await  validate()){
       const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_APIKEY}&append_to_response=images,videos`);
       const result = await response.json();
       setPoster(result);
@@ -97,12 +106,13 @@ function Individual() {
         let logo = result.images.logos.filter(itm =>
           itm.iso_639_1 === "en"
         );
-
+        
         setPoster(prevState => ({ ...prevState, videos: trailers[trailers.length - 1], images: { logos: logo } }));
       }
     }
-
-    fetchData();
+    }
+    
+    fetchData()
     getcelebs(id);
 
   }, [id]);
@@ -154,11 +164,11 @@ function Individual() {
           <div className="top position-relative " style={{ width: '90%' }} >
             <div className="hero-section d-flex  flex-lg-row flex-sm-column justify-content-lg-around justify-content-sm-center m-5 align-items-lg-center">
 
-             <div className="details d-flex flex-column align-items-start p-5 w-50  gap-1">
+             <div className="details d-flex flex-column align-items-start p-5 w-sm-100  w-50    gap-1  overflow-hidden">
 
                 {
                   poster.images.logos[0] ?
-                    <img src={`https://image.tmdb.org/t/p/w500/${poster.images.logos[0].file_path}`}  style={{ marginBottom: 50}} alt="" /> :
+                    <img src={`https://image.tmdb.org/t/p/w500/${poster.images.logos[0].file_path}`}  style={{ marginBottom: 50,width:'100%'}} alt="" /> :
                     <h1>{poster.title}</h1>
                 }
                 <p style={{ textAlign: 'start' }}>{poster.overview}</p>

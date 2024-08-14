@@ -9,10 +9,12 @@ function Login() {
     e.preventDefault()
     const from=new FormData(e.target)
     try{
-      const data=await axios.post('http://localhost:2114/api/login',{
+      const {data}=await axios.post('http://localhost:2114/api/login',{
         email:from.get('email'),
         password:from.get('pwd')
       })
+      console.log(data);
+      if(data.usertoken){
       toast.success('login sucessful', {
         position: "top-right",
         autoClose: 2500,
@@ -23,7 +25,8 @@ function Login() {
         theme:'dark',
         transition: Bounce,
         });
-        navigate('/')
+        // navigate('/')
+      }
        
     }
     catch(err){

@@ -26,36 +26,30 @@ function Model({ show, setShow, data ,name}) {
         const totalEntries = [...remainingEntries, ...top3Entries];
         setcast(totalEntries)
     }
-    async function getcelebs(id) {
-        if ( show)
-        {
-        const data = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&api_key=${process.env.REACT_APP_APIKEY}`)
-        const res = await data.json()
-        if(res)
-            topcrew(res.cast)
-        }
-
-
-
-    }
-
-    async function getSeriescelebs(id) {
-        if ( show)
-        {
-        const data = await fetch(`https://api.themoviedb.org/3/tv/${id}/credits?language=en-US&api_key=${process.env.REACT_APP_APIKEY}`)
-        const res = await data.json()
-        if(res)
-            topcrew(res.cast)
-        }
-
-
-
-    }
     useEffect(() => {
-    name==='series'? getSeriescelebs(data.id)
-        :getcelebs(data.id)
-    }, [data])
-
+        const getcelebs = async (id) => {
+            if (show) {
+                const data = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&api_key=${process.env.REACT_APP_APIKEY}`);
+                const res = await data.json();
+                if (res) topcrew(res.cast);
+            }
+        };
+    
+        const getSeriescelebs = async (id) => {
+            if (show) {
+                const data = await fetch(`https://api.themoviedb.org/3/tv/${id}/credits?language=en-US&api_key=${process.env.REACT_APP_APIKEY}`);
+                const res = await data.json();
+                if (res) topcrew(res.cast);
+            }
+        };
+    
+        if (name === 'series') {
+            getSeriescelebs(data.id);
+        } else {
+            getcelebs(data.id);
+        }
+    }, [data, name, show]);
+    
     return (
         <Modal show={show} onHide={handleClose} size='lg' aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Body >

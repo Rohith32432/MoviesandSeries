@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Form, Offcanvas } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -6,7 +6,9 @@ function Search({ show, setShow, name }) {
     const handleClose = () => setShow(false);
     const [movies, setMovies] = useState([]);
     const [celebs, setCelebs] = useState([]);
-
+//     const fcs=useRef(null)
+//     console.log(fcs);
+// if(fcs.current) fcs.current.focus()
     async function searchMovies(e) {
         try {
             let qry = e.target.value;
@@ -17,7 +19,7 @@ function Search({ show, setShow, name }) {
             console.error('Error searching movies:', error);
         }
     }
-
+    
     async function searchCelebs(qry) {
         try {
             const data = await fetch(`https://api.themoviedb.org/3/search/person?query=${qry}&include_adult=true&language=en-US&page=1&api_key=${process.env.REACT_APP_APIKEY}`);
@@ -31,7 +33,7 @@ function Search({ show, setShow, name }) {
             console.error('Error searching celebrities:', error);
         }
     }
-
+    
     useEffect(() => {
         if (name != null) {
             searchCelebs(name);
@@ -52,7 +54,8 @@ function Search({ show, setShow, name }) {
                             <Form.Control  
                                 className='bg-dark text-light'
                                 onChange={(e) => { searchMovies(e) }}
-                               autoFocus={true}
+                            //   ref={fcs}
+                              
                             />
                             <div className="d-flex flex-wrap p-2 my-2">
                                 {movies.map((movie, index) => (
