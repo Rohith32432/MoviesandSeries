@@ -28,5 +28,10 @@
     #container{
       flex-direction: row !important;
     }
+    #setwidth{
+      width: 100% !important;
+    }
   }
-  
+  #setwidth{
+    width: 50%;
+  }

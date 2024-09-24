@@ -6,8 +6,8 @@ function Search({ show, setShow, name }) {
     const handleClose = () => setShow(false);
     const [movies, setMovies] = useState([]);
     const [celebs, setCelebs] = useState([]);
-//     const fcs=useRef(null)
-//     console.log(fcs);
+    const fcs=useRef([])
+    console.log(fcs);
 // if(fcs.current) fcs.current.focus()
     async function searchMovies(e) {
         try {
@@ -40,6 +40,10 @@ function Search({ show, setShow, name }) {
         }
     }, [name]);
 
+    useEffect(()=>{
+        if(fcs[0])
+            fcs.current.focus()
+    })
     return (
         <>
             <Offcanvas show={show} onHide={handleClose} placement='end' className='bg-dark text-light'>
@@ -54,7 +58,7 @@ function Search({ show, setShow, name }) {
                             <Form.Control  
                                 className='bg-dark text-light'
                                 onChange={(e) => { searchMovies(e) }}
-                            //   ref={fcs}
+                                ref={(input) => { fcs.current = input; }}
                               
                             />
                             <div className="d-flex flex-wrap p-2 my-2">

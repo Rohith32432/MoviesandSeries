@@ -1,57 +1,66 @@
-// import React, { useEffect, useState } from 'react';
-// import AwesomeSlider from 'react-awesome-slider';
-// import 'react-awesome-slider/dist/styles.css';
-// import withAutoplay from 'react-awesome-slider/dist/autoplay';
 
-// function Slider() {
-//     const [upcoming, setUpcoming] = useState([]);
+import React, { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
-//     const AutoplaySlider = withAutoplay(AwesomeSlider);
+const ImageSlider = () => {
+  const [upcoming, setUpcoming] = useState([]);
 
-//     const getUpcoming = async () => {
-//         const data = await fetch("https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&api_key=ff7c0340a9933baee3f46968474a001c&append_to_response=images");
-//         const res = await data.json();
-//         setUpcoming(res.results);
-//     }
 
-//     useEffect(() => {
-//         getUpcoming();
-//     }, []);
+  const getUpcoming = async () => {
+    const data = await fetch("https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&api_key=ff7c0340a9933baee3f46968474a001c&append_to_response=images");
+    const res = await data.json();
+    setUpcoming(res.results.slice(0, 9));
+  }
 
-//     return (
-//         <div>
-//             <AutoplaySlider
-//                 bullets={false}
-//                 mobileTouch={true}
-//                 style={{ height: '40vh' }}
-//                 play={true}
-               
-//                 cancelOnInteraction={false} // should stop playing on user interaction
-//                 interval={3000}
-//             >
-//                 {upcoming.map((e, i) => (
-//                     <div key={i} data-src={`https://image.tmdb.org/t/p/w1280/${e.backdrop_path}`} style={{ display: 'block' }}>
-//                         <div style={{
-//                             position: 'absolute',
-//                             display: 'flex'
-//                         }}>
-//                             <h1>{e.title}</h1>
-//                         </div>
-//                     </div>
-//                 ))}
-//             </AutoplaySlider>
-//         </div>
-//     );
-// }
+  useEffect(() => {
+    getUpcoming();
+  }, []);
 
-// export default Slider;
 
-import React from 'react'
-
-function slider() {
   return (
-    <div>slider</div>
-  )
-}
+    <Swiper
+      modules={[Navigation, Pagination, Autoplay]} // Register modules
+      spaceBetween={30}
+      centeredSlides={true}
+      autoplay={{
+        delay: 3000, // Adjust autoplay delay as needed
+        disableOnInteraction: false, // Keep autoplay running after interaction
+      }}
+      pagination={{ clickable: true }}
+      navigation
+      style={{
+        width: '100%',
+        height: '45vh',
+      }}
+    >
+      {upcoming.map((e, index) => (
+        <SwiperSlide key={index} style={{ width: '100%', height: '100%' }}>
+          <img
+            src={`https://image.tmdb.org/t/p/w1280/${e.backdrop_path}`}
+            alt={e.alt}
+            style={{
+              width: '100%',
+              height: '400px',
+              objectFit: 'cover',
+            }}
+          />
+          <div style={{
+            position: 'absolute',
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
 
-export default slider
+            top: 0
+          }}>
+            <h1>{e.title}</h1>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
+};
+
+export default ImageSlider;

@@ -5,8 +5,7 @@ import Search from './search';
 import { UserGlobal } from '../../context/UserContext';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
-
+import '../style.css'
 
 function Individual() {
   const { id } = useParams();
@@ -162,13 +161,13 @@ function Individual() {
       {poster ? (
         <div className='d-flex  justify-content-end w-100' >
           <div className="top position-relative " style={{ width: '90%' }} >
-            <div className="hero-section d-flex  flex-lg-row flex-sm-column justify-content-lg-around justify-content-sm-center m-5 align-items-lg-center">
+            <div className="hero-section d-flex  flex-lg-row flex-sm-column justify-content-lg-around justify-content-sm-center m-5 align-items-lg-center align-items-sm-center">
 
-             <div className="details d-flex flex-column align-items-start p-5 w-sm-100  w-50    gap-1  overflow-hidden">
+             <div className="details d-flex flex-column align-items-start p-5  gap-1  overflow-hidden" id='setwidth'>
 
                 {
                   poster.images.logos[0] ?
-                    <img src={`https://image.tmdb.org/t/p/w500/${poster.images.logos[0].file_path}`}  style={{ marginBottom: 50,width:'100%'}} alt="" /> :
+                    <img src={`https://image.tmdb.org/t/p/w500/${poster.images.logos[0].file_path}`}  style={{ marginBottom: 50,width:'90%'}} alt="" /> :
                     <h1>{poster.title}</h1>
                 }
                 <p style={{ textAlign: 'start' }}>{poster.overview}</p>
