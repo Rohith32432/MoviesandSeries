@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button"
 
 import { useState } from 'react'
@@ -5,15 +6,34 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { CardDemo } from "./card"
+import { Sidebar } from "lucide-react"
+import { Tooltip } from "@radix-ui/react-tooltip"
+import { Provider } from "react-redux"
+import store from "./store/store"
+import Home from "./components/Home"
+import { Route, Routes } from "react-router-dom"
 
-function App() {
-  const [count, setCount] = useState(0)
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
+import { AppSidebar } from "./components/AppSidebar"
+import Individual from "./components/Individual"
+function App() { 
   return (
    <>
-   <h1 className='text-5xl font-bold '>Staritng</h1>
-   <Button >click me</Button>
-   <CardDemo/>
+   {/* <Provider store={store}> */}
+  <div className="flex ">
+   <SidebarProvider>
+    <AppSidebar/>
+   </SidebarProvider>
+
+  <Routes>
+    <Route path="/" element={<Home/>} />
+    <Route element={<Individual/>} path="/watch/movie/:id"/>
+
+  </Routes>
+  </div>
+   {/* </Provider>z */}
+   
    </>
   )
 }
