@@ -47,7 +47,7 @@ function Movies({detals,type}) {
             :
             movies?.map((movie, i) => (
               <Card data={movie} openModal={openModal}
-              handle={detals}
+               handle={type=='series'? detals:()=>{}}
                key={i} />
             ))
         }

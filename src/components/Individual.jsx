@@ -10,6 +10,7 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import { Loading } from './Loading'
+import { useLocalStorage } from '../hooks/useLocalStorage';
 function Individual() {
   const { id } = useParams();
   const {pathname}=useLocation()
@@ -18,7 +19,7 @@ function Individual() {
   const [cast, setCast] = useState([]);
   const [celbname, setCelbname] = useState('');
   const [show, setShow] = useState(false);
-
+const{save}=useLocalStorage()
   const { data: movieData, loading, error } = useFetch(`https://api.themoviedb.org/3/${type!='series'?'movie':'tv'}/${id}?append_to_response=images,videos`);
 
   // Fetch cast and crew data using useFetch custom hook
@@ -82,6 +83,7 @@ function Individual() {
           ...(crew.Art || [])
         ];
         setCast(combinedCast);
+        
       }
     }
   }, [movieData, castData, loading, id]);
@@ -124,7 +126,7 @@ function Individual() {
                   <a href={poster.videos ? `https://www.youtube.com/watch?v=${poster.videos.key}` : "#"} className='flex-grow'>
                     <Button className='w-full p-2'>Watch Trailer</Button>
                   </a>
-                  <Button onClick={() => { }} className="w-auto">Add to Watchlist</Button>
+                  <Button onClick={() => {save('watchlist',{id:movieData?.id,type}) }} className="w-auto">Add to Watchlist</Button>
                 </div>
 
               </div>

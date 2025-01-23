@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 function CardX({data,openModal,handle}) {
     
     return (
-        <div onMouseOver={()=>{handle(data)}}>
+        <div onMouseOver={()=>{ handle(data)}}>
             <TooltipProvider >
                 <Tooltip>
                     <TooltipTrigger>

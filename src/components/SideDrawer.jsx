@@ -115,7 +115,7 @@ function SideDrawer({ type, isopen, isclose, data }) {
                                                 {celebs?.known_for?.map((e, i) => (
                                                     <div
                                                         key={i}
-                                                        className="p-2 h-max 
+                                                        className="p-2 underline h-max 
                                             w-full
                                             m-1 bg-slate-900
                                             hover:bg-slate-800 rounded-md shadow-md "
