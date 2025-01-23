@@ -17,6 +17,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
 import { AppSidebar } from "./components/AppSidebar"
 import Individual from "./components/Individual"
+import Series from "./components/Series"
 function App() { 
   return (
    <>
@@ -29,7 +30,8 @@ function App() {
   <Routes>
     <Route path="/" element={<Home/>} />
     <Route element={<Individual/>} path="/watch/movie/:id"/>
-
+    <Route path="/series" element={<Series/>} />
+    <Route element={<Individual/>} path="/watch/series/:id"/>
   </Routes>
   </div>
    {/* </Provider>z */}

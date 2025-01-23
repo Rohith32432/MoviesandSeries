@@ -7,13 +7,13 @@ import Card from './Card';
 import PaginationX from './Pagination';
 import { Loading } from './Loading';
 
-function Movies() {
+function Movies({detals,type}) {
   const [movies, setMovies] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modeldata, setmodeldata] = useState(null)
   const [pagno, setpageno] = useState(1)
   const { data, loading, error } = useFetch(
-    `https://api.themoviedb.org/3/discover/movie?page=${pagno}&sort_by=popularity.desc`
+    `https://api.themoviedb.org/3/discover/${type!='series'?'movie':'tv'}?page=${pagno}&sort_by=popularity.desc`
   );
 
   console.log(pagno);
@@ -39,19 +39,21 @@ function Movies() {
 
   return (
     <>
-      <ModelPreview isopen={isModalOpen} isclose={closeModal} modeldata={modeldata} />
+      <ModelPreview isopen={isModalOpen} type={type} isclose={closeModal} modeldata={modeldata} />
 
       <div className=' flex flex-wrap justify-center items-center gap-5'>
         {
-          loading ? Array(10).fill(' ').map((e, i) => (<Loading key={e + i} />))
+          loading ? Array(20).fill(' ').map((e, i) => (<Loading key={e + i} />))
             :
             movies?.map((movie, i) => (
-              <Card data={movie} openModal={openModal} key={i} />
+              <Card data={movie} openModal={openModal}
+              handle={detals}
+               key={i} />
             ))
         }
       </div>
       {/* pagination */}
-      <div className=' relative h-full w-[10%] justify-start flex items-start '>
+      <div className=' relativeh-full w-[10%] justify-start flex items-start '>
 
         <div className='fixed  right-0  m-2'>
         <PaginationX pageno={pagno} newpage={setpageno} />

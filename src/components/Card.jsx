@@ -3,9 +3,10 @@ import { useFetch } from '../helpful/MakeRequest';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-function CardX({data,openModal}) {
+function CardX({data,openModal,handle}) {
+    
     return (
-        <div>
+        <div onMouseOver={()=>{handle(data)}}>
             <TooltipProvider >
                 <Tooltip>
                     <TooltipTrigger>
@@ -21,9 +22,18 @@ function CardX({data,openModal}) {
                             </CardContent>
                             <CardHeader className="p-4 text-center">
                                 <CardTitle>
-                                    {data?.title.length < 25
+                                    {
+                                    data?.title ?(
+                                    data?.title.length < 25
                                         ? data?.title
-                                        : data?.title.substring(0, 25) + '...'}
+                                        : data?.title.substring(0, 25) + '...')
+                                    :(
+                                         data?.name.length < 25
+                                        ? data?.name
+                                        : data?.name.substring(0, 25) + '...'
+                                    )
+                                    
+                                    }
                                 </CardTitle>
                             </CardHeader>
                         </Card>

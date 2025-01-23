@@ -1,9 +1,9 @@
 import { Skeleton } from "@/components/ui/skeleton"
 
-export function Loading() {
+export function Loading(props) {
   return (
     <>
-        <Skeleton className="flex items-center min-h-[200px] flex-col justify-center gap-3 space-x-4">
+        <Skeleton className="flex items-center min-h-[200px] flex-col justify-center gap-3 space-x-4" {...props}>
 
       <Skeleton className="h-12 w-12 rounded-full" />
       

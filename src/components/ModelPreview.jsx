@@ -14,7 +14,7 @@ import React, { useEffect, useState } from 'react'
 import { useFetch } from "../helpful/MakeRequest"; 
 import { Link } from "react-router-dom";
 
-function ModelPreview({ isopen, isclose, modeldata }) {
+function ModelPreview({ isopen,type, isclose, modeldata }) {
   const [cast, setCast] = useState([])
 
   function topcrew(res) {
@@ -34,7 +34,7 @@ function ModelPreview({ isopen, isclose, modeldata }) {
   }
 
   const { data, loading, error } = useFetch(
-    modeldata?.id ? `https://api.themoviedb.org/3/movie/${modeldata.id}/credits?language=en-US` : null
+    modeldata?.id ? `https://api.themoviedb.org/3/${type!='series'?'movie':'tv'}/${modeldata.id}/credits?language=en-US` : null
   );
   console.log(data);
   
@@ -55,7 +55,7 @@ useEffect(() => {
           </div>
           <div className="w-[70%] flex-1 flex flex-col  h-full justify-center gap-5">
             <>
-              <DialogTitle className='text-3xl'>{modeldata?.original_title}</DialogTitle>
+              <DialogTitle className='text-3xl'>{type!='series'? modeldata?.original_title : modeldata?.name}</DialogTitle>
               <DialogDescription className='text-gray-300'>
                 {modeldata?.overview}
               </DialogDescription>
@@ -75,7 +75,7 @@ useEffect(() => {
               
               ))}
             </div>
-            <Link to={`/watch/movie/${modeldata?.id}`} >
+            <Link to={`/watch/${type!='series'?'movie':'series'}/${modeldata?.id}`} >
             <Button variant="secondary" className='w-full m-5  self-center'>{'Watch Movie'}</Button>
             </Link>
           </div>

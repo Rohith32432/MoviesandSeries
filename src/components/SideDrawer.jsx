@@ -40,7 +40,7 @@ function SideDrawer({ type, isopen, isclose, data }) {
             if (Array.isArray(response.results) && response.results.length > 0) {
                 setCelebs(response.results[0]);
             } else {
-                setCelebs([]); 
+                setCelebs([]);
             }
         } catch (error) {
             console.error('Error searching celebrities:', error);
@@ -53,65 +53,86 @@ function SideDrawer({ type, isopen, isclose, data }) {
     }, [data])
 
     return (
-        <div className="w-full">
-            <Drawer direction='right' open={isopen} onOpenChange={isclose}  >
-                {/* Trigger the Drawer */}
-                {
-                    type=='side' &&
-                <DrawerTrigger className='text-sm' asChild={isopen}><Search /></DrawerTrigger>
-                }
 
-                <DrawerContent
-                    className='bg-foreground text-background h-full w-1/4'
-                >
-                    <DrawerHeader>
-                        <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                    </DrawerHeader>
+
+        <>
+            <div className="w-full">
+                <Drawer direction="right" open={isopen} onOpenChange={isclose}>
+                    {/* Trigger the Drawer */}
                     {
-                        type != 'actors'  ?
-                            <div className="w-full p-4 overflow-hidden">
-
-                                <Input autoFocus={true} onChange={(e) => { searchMovies(e.target.value) }} />
-                                <div className="flex h-full  flex-wrap  no-scrollbar overflow-y-scroll" >
-                                    {/* <img src={`https://image.tmdb.org/t/p/w500//xeEw3eLeSFmJgXZzmF2Efww0q3s.jpg`} width={170 } alt="" /> */}
-
-                                    {
-                                        movie?.map((e, i) => (
-                                            <div className="p-1 m-1" key={i}>
-                                                <Link to={`/watch/movie/${e?.id}`} >
-                                                    <img src={`https://image.tmdb.org/t/p/w500/${e.poster_path}`} width={150} className="rounded-lg" alt="" />
-                                                </Link>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </div>
-                            :
-                            <div>
-                                <h1>{celebs?.name}</h1>
-                                <img src={`https://image.tmdb.org/t/p/w500/${celebs?.profile_path}`} width={150} className="rounded-lg" alt="" />
-                                <div>
-                                    <span>{celebs?.known_for_department}</span>
-                                </div>
-                                <div>
-                                    {
-                                        celebs?.known_for?.map((e,i)=>(
-                                            <div key={i}>
-                                                <HoverCardDemo data={e}/>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                                </div>
+                        type == 'side' &&
+                        <DrawerTrigger className='text-sm' asChild={isopen}><Search /></DrawerTrigger>
                     }
-                    {/* Drawer Footer */}
 
-                    {/* <DrawerFooter>
-                        <Button>Submit</Button>
-                    </DrawerFooter> */}
-                </DrawerContent>
-            </Drawer>
-        </div>
+                    <DrawerContent className="bg-foreground text-white h-full w-full md:w-1/3 lg:w-1/4 shadow-lg">
+                        <DrawerHeader className="flex justify-between items-center p-4 border-b border-gray-700">
+                            <DrawerTitle className="text-lg font-bold">
+                                {type === "actors" ? "Actor Details" : "Movies"}
+                            </DrawerTitle>
+                        </DrawerHeader>
+                        {
+
+                            type != 'actors' ?
+                                <div className="w-full p-4 overflow-hidden">
+
+                                    <Input autoFocus={true} onChange={(e) => { searchMovies(e.target.value) }} />
+                                    <div className="flex h-full  flex-wrap  no-scrollbar overflow-y-scroll" >
+                                        {/* <img src={`https://image.tmdb.org/t/p/w500//xeEw3eLeSFmJgXZzmF2Efww0q3s.jpg`} width={170 } alt="" /> */}
+
+                                        {
+                                            movie?.map((e, i) => (
+                                                <div className="p-1 m-1" key={i}>
+                                                    <Link to={`/watch/movie/${e?.id}`} >
+                                                        <img src={`https://image.tmdb.org/t/p/w500/${e.poster_path}`} width={150} className="rounded-lg" alt="" />
+                                                    </Link>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                                :
+                                <div className="p-4 flex flex-col items-center">
+                                    {/* Profile Picture */}
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/w500/${celebs?.profile_path}`}
+                                        alt={celebs?.name}
+                                        className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-gray-800"
+                                    />
+
+                                    {/* Actor Name */}
+                                    <h1 className="mt-4 text-2xl font-bold text-white">{celebs?.name}</h1>
+
+                                    {/* Known For Department */}
+                                    <span className="mt-2 text-sm text-gray-400">
+                                        {celebs?.known_for_department}
+                                    </span>
+
+                                    {/* Additional Details */}
+                                    <div className="mt-4 w-full space-y-4">
+                                        <div className=" p-4 rounded-md shadow-md">
+                                            <h3 className="text-lg my-2 font-semibold text-white">Known For</h3>
+                                            <div className="flex flex-col items-center h-max  ">
+                                                {celebs?.known_for?.map((e, i) => (
+                                                    <div
+                                                        key={i}
+                                                        className="p-2 h-max 
+                                            w-full
+                                            m-1 bg-slate-900
+                                            hover:bg-slate-800 rounded-md shadow-md "
+                                                    >
+                                                        <HoverCardDemo data={e} />
+
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        }
+                    </DrawerContent>
+                </Drawer>
+            </div>
+        </>
     )
 }
 

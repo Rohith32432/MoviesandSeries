@@ -2,8 +2,6 @@ import React from 'react'
 
 import Movies from "./Movies" 
 import Swiper from "./Swiper"
-import PaginationX from './Pagination'
-
 function Home() {
   return (
     <>
@@ -15,12 +13,7 @@ function Home() {
       </div>
       <div className=' flex gap-2 items-start  '>
         <Movies/>
-        {/* pagination */}
-        {/* <div className='h-full  '>
-
-        <PaginationX />
-        </div> */}
-        
+      
       </div>
     </div>
 

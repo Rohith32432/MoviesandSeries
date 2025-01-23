@@ -23,7 +23,7 @@ const items = [
   },
   {
     title: "Series",
-    url: "#",
+    url: "/series",
     icon: Inbox,
   },
   {
