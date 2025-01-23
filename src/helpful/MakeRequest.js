@@ -12,7 +12,7 @@ export function useFetch(url, method = 'GET') {
       setResponse({ data: null, loading: true, error: null });
 
       try {
-        const res = await fetch(`${url}&api_key=ff7c0340a9933baee3f46968474a001c`, { method });
+        const res = await fetch(`${url}&api_key=${import.meta.env.VITE_APP_APIKEY}`, { method });
         if (!res.ok) {
           throw new Error('Network response was not ok');
         }
