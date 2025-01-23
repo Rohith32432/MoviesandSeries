@@ -10,6 +10,7 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import { Loading } from './Loading'
+import { useToast } from "../hooks/use-toast"
 import { useLocalStorage } from '../hooks/useLocalStorage';
 function Individual() {
   const { id } = useParams();
@@ -22,7 +23,9 @@ function Individual() {
 const{save}=useLocalStorage()
   const { data: movieData, loading, error } = useFetch(`https://api.themoviedb.org/3/${type!='series'?'movie':'tv'}/${id}?append_to_response=images,videos`);
 
-  // Fetch cast and crew data using useFetch custom hook
+  const { toast } = useToast()
+
+ 
   const { data: castData } = useFetch(`https://api.themoviedb.org/3/${type!='series'?'movie':'tv'}/${id}/credits?language=en-US`);
 
   // Filter and sort crew members by department
@@ -126,7 +129,11 @@ const{save}=useLocalStorage()
                   <a href={poster.videos ? `https://www.youtube.com/watch?v=${poster.videos.key}` : "#"} className='flex-grow'>
                     <Button className='w-full p-2'>Watch Trailer</Button>
                   </a>
-                  <Button onClick={() => {save('watchlist',{id:movieData?.id,type}) }} className="w-auto">Add to Watchlist</Button>
+                  <Button onClick={() => {
+                    toast({
+                      description: "Add To WatchList.",
+                    })
+                    save('watchlist',{id:movieData?.id,type}) }} className="w-auto">Add to Watchlist</Button>
                 </div>
 
               </div>

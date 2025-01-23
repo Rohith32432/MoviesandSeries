@@ -76,7 +76,7 @@ useEffect(() => {
               ))}
             </div>
             <Link to={`/watch/${type!='series'?'movie':'series'}/${modeldata?.id}`} >
-            <Button variant="secondary" className='w-full m-5  self-center'>{'Watch Movie'}</Button>
+            <Button variant="secondary" className='w-full m-5  self-center'>{`Watch ${type!='series'?'Movie':'Series'}`}</Button>
             </Link>
           </div>
         </div>

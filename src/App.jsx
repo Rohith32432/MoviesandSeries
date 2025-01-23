@@ -1,19 +1,14 @@
 
-import { Button } from "@/components/ui/button"
+import { Toaster } from "@/components/ui/toaster"
 
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { CardDemo } from "./card"
-import { Sidebar } from "lucide-react"
-import { Tooltip } from "@radix-ui/react-tooltip"
+
 import { Provider } from "react-redux"
 import store from "./store/store"
 import Home from "./components/Home"
 import { Route, Routes } from "react-router-dom"
 
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar"
 
 import { AppSidebar } from "./components/AppSidebar"
 import Individual from "./components/Individual"
@@ -37,6 +32,8 @@ function App() {
     <Route element={<Profile/>} path="/profile"/>
     <Route path="/*" element={<h1>Not Found <MovieSvg/></h1>}></Route>
   </Routes>
+  <Toaster />
+
   </div>
    {/* </Provider>z */}
    

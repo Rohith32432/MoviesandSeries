@@ -10,9 +10,9 @@ export function useLocalStorage() {
         });
     }
     function remove(id) {
-        const update = items?.filter((e, index) => index != id)
-        setItems(update)
-        localStorage.setItem("watchlist", JSON.stringify(update));
+        const updatedItems = items.filter((item) => item.id !== id);
+        setItems(updatedItems)
+        localStorage.setItem("watchlist", JSON.stringify(updatedItems));
     }
     useEffect(() => {
         const storedItems = localStorage.getItem("watchlist");
