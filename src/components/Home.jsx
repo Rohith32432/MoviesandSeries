@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
     
-      <div className="flex-1 flex  flex-col overflow-hidden ">
+      <div className="flex-1 flex gap-10 flex-col overflow-hidden ">
       {/* <h1 >slider</h1> */}
       <div className="w -full">
       <Swiper/>
